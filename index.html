@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ZapMona</title>
+        <script src="https://libs.zappar.com/zappar-aframe/*/zappar-aframe.js"></script>
+        <script>
+            let myImageTracker = document.getElementById("my-image-tracker");
+
+            myImageTracker.addEventListener("zappar-visible", () => {
+                console.log("Image has become visible");
+            });
+
+            myImageTracker.addEventListener("zappar-notvisible", () => {
+                console.log("Image is no longer visible");
+            });
+        </script>
+    </head>
+    <body>
+        <a-scene
+            vr-mode-ui="enabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
+            embedded
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+        >
+            <a-assets>
+                <a-asset-item id="target-file" src="./assets/img.zpt" />
+            </a-assets>
+
+            <a-entity zappar-image="#target-file">
+                <!-- PLACE CONTENT TO APPEAR ON THE IMAGE HERE -->
+            </a-entity>
+            <a-entity
+                camera
+                zappar-camera="user-facing: true; user-camera-mirror-mode: poses"
+            >
+            </a-entity>
+        </a-scene>
+    </body>
+</html>
